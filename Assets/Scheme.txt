@@ -1,0 +1,54 @@
+Game
+    class Road
+    {
+        List<Vector2> points
+        void AddPoint(Vector2 point)
+        {
+            points.Add(point);
+        }
+        static Vector2[] CalculateEdges(Road, float size)
+        {
+            returns edges generated from Road
+        }
+    }
+    class RoadCreator : MonoBehaviour
+    {   
+        Create(Road)
+        {
+            Create mesh based on Road
+        }
+    }
+        
+    class Car : MonoBehaviour
+        void Flick(Vector3 direction, float force)
+        {   
+            apply impulse on RigidBody 
+        }
+        public void Spawn(Vector3)
+        {
+            spawns car at point;
+        }
+        event OnSpawn
+        event OnDeath
+
+    class CameraScript
+        public void Follow(Transform)
+        {
+            start to follow transform
+        }
+        public void Unfollow()
+        {
+            end follow
+        }
+
+    class Arrow : MonoBehavior
+    {
+        Hide()
+        Reveal()
+
+        SetForce(float)
+        SetDirection(Vector3)
+    }
+Input
+    class Input : ScriptableObject
+    ??

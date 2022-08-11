@@ -1,0 +1,41 @@
+Main Menu
+    -Start game
+    -Leaderboard
+
+Game
+    Road
+    Car
+        Moves by Flick force and direction
+        Respawns on last point if falls
+    Camera
+        x rotation 45
+        follows car
+    Arrow
+        points Flick direction
+        scales by Flick force
+    Start
+        spawns Car
+    Finish
+        stops Timer
+        saves Timer
+Input
+    Flick
+UI
+    UpperLeft corner
+        Force
+            shows force of Flick in %
+        Timer
+            shows Time on level from start to finish
+            precision 0.0001
+        Level progress
+            shows level progress in %
+    UpperRight corner
+        Button
+            shows Pause Menu
+    Pause Menu
+        Resume
+            resumes game
+        Restart
+            restarts level
+        Exit
+            goes to Main Menu
