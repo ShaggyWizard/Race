@@ -17,6 +17,7 @@ public class RoadCreator : MonoBehaviour
 
     private const float halfRotation = 180f;
     private const float maxAngle = 179.9f;
+
     void OnValidate()
     {
         Vector2[] points = new Vector2[_angleAndRange.Length + 1];

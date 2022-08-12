@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ebf9e99752ac8b47a573ef5a5252c39, type: 3}
   m_Name: OutlineFeature
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   settings:
     outlineMaterial: {fileID: 2100000, guid: 73abf4b03fbbbbb43a18379a09af536e, type: 2}
 --- !u!114 &11400000
