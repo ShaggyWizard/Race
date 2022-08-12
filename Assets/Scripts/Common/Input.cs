@@ -66,6 +66,8 @@ public class Input : MonoBehaviour
     {
         Vector2 delta = _touchEndPos - _touchStartPos;
 
+        if (delta.y > 0) { return Vector2.zero; }
+
         delta.y = delta.y > 0 ? 0 : delta.y;
 
         float magnitude = delta.magnitude > _maxFlickDistance ? _maxFlickDistance : delta.magnitude;
