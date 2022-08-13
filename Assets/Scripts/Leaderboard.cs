@@ -43,4 +43,10 @@ public static class Leaderboard
 		}
 		return new Score("null", 0);
 	}
+	public static string FormatTime(float time)
+	{
+		int seconds = Mathf.FloorToInt(time);
+		int milliseconds = (int)((time - seconds) * 10000);
+		return $"{seconds}.{ milliseconds}";
+	}
 }

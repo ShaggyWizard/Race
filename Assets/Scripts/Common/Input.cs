@@ -62,7 +62,7 @@ public class Input : MonoBehaviour
         _lockInput = false;
     }
     //Max flick distance is half of screen lesser dimension;
-    public Vector2 GetNormalizedFlickDelta()
+    private Vector2 GetNormalizedFlickDelta()
     {
         Vector2 delta = _touchEndPos - _touchStartPos;
 
@@ -87,6 +87,7 @@ public class Input : MonoBehaviour
     private void EndTouchPrimary(InputAction.CallbackContext ctx)
     {
         if (_lockInput) { return; }
+        if (!_touching) { return; }
         transform.localPosition = initialposition;
         _touching = false;
 
