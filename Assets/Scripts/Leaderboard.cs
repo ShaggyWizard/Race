@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 [System.Serializable]
 public struct Score
@@ -21,27 +22,23 @@ public static class Leaderboard
 {
 	public static void SaveScore(Score newScore)
     {
-		BinaryFormatter formatter = new BinaryFormatter();
-		string path = Application.persistentDataPath + "/leaderboard.sav";
+		XmlSerializer xml = new XmlSerializer(typeof(Score));
+		StringWriter writer = new StringWriter();
 
-		FileStream stream = new FileStream(path, FileMode.Create);
+		xml.Serialize(writer, newScore);
 
-		formatter.Serialize(stream, newScore);
+		PlayerPrefs.SetString("save", writer.ToString());
 	}
 	public static Score LoadScore()
 	{
-		string path = Application.persistentDataPath + "/leaderboard.sav";
+		if (PlayerPrefs.HasKey("save"))
+		{
+			XmlSerializer xml = new XmlSerializer(typeof(Score));
+			StringReader reader = new StringReader(PlayerPrefs.GetString("save"));
 
-		if (File.Exists(path))
-        {
-			BinaryFormatter formatter = new BinaryFormatter();
-			FileStream stream = new FileStream(path, FileMode.Open);
-			Score score = (Score)formatter.Deserialize(stream);
-			stream.Close();
-
-			return score;
+			return (Score)xml.Deserialize(reader);
 		}
-		return new Score("null", 0);
+		return new Score("", 0);
 	}
 	public static string FormatTime(float time)
 	{
