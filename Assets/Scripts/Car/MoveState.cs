@@ -21,13 +21,11 @@ public class MoveState : MonoBehaviour
     {
         if (!_moving && _rigidbody.velocity.magnitude != 0)
         {
-            Debug.Log("start");
             _onStartMoving.Invoke();
             _moving = true;
         }
         else if (_moving && _rigidbody.velocity.magnitude == 0)
         {
-            Debug.Log("finish");
             _onStopMoving.Invoke();
             _moving = false;
         }

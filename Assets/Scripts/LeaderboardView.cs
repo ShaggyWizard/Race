@@ -8,9 +8,14 @@ public class LeaderboardView : MonoBehaviour
 
     private void Awake()
     {
-        var score = Leaderboard.LoadScore();
-
-        _timeText.text = $"{score.name} - {Leaderboard.FormatTime(score.time)}";
+        if (Leaderboard.TryLoadScore(out Score score))
+        {
+            _timeText.text = $"{Leaderboard.FormatTime(score.time)}";
+        }
+        else
+        {
+            _timeText.gameObject.SetActive(false);
+        }
     }
 
     public void SetScene(int sceneID)

@@ -20,8 +20,35 @@ public struct Score
 
 public static class Leaderboard
 {
-	public static void SaveScore(Score newScore)
+	public static bool TrySaveScore(Score newScore)
     {
+		if (TryLoadScore(out Score oldScore) && oldScore.time < newScore.time)
+		{
+			return false;
+		}
+		Save(newScore);
+		return true;
+	}
+	public static bool TryLoadScore(out Score score)
+	{
+		if (PlayerPrefs.HasKey("save"))
+		{
+			score = Load();
+			return true;
+		}
+		score = new Score();
+		return false;
+	}
+	public static string FormatTime(float time)
+	{
+		int seconds = Mathf.FloorToInt(time);
+		int milliseconds = (int)((time - seconds) * 10000);
+		return $"{seconds}.{ milliseconds}";
+	}
+
+
+	private static void Save(Score newScore)
+	{
 		XmlSerializer xml = new XmlSerializer(typeof(Score));
 		StringWriter writer = new StringWriter();
 
@@ -29,21 +56,11 @@ public static class Leaderboard
 
 		PlayerPrefs.SetString("save", writer.ToString());
 	}
-	public static Score LoadScore()
+	private static Score Load()
 	{
-		if (PlayerPrefs.HasKey("save"))
-		{
-			XmlSerializer xml = new XmlSerializer(typeof(Score));
-			StringReader reader = new StringReader(PlayerPrefs.GetString("save"));
+		XmlSerializer xml = new XmlSerializer(typeof(Score));
+		StringReader reader = new StringReader(PlayerPrefs.GetString("save"));
 
-			return (Score)xml.Deserialize(reader);
-		}
-		return new Score("", 0);
-	}
-	public static string FormatTime(float time)
-	{
-		int seconds = Mathf.FloorToInt(time);
-		int milliseconds = (int)((time - seconds) * 10000);
-		return $"{seconds}.{ milliseconds}";
+		return (Score)xml.Deserialize(reader);
 	}
 }

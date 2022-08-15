@@ -8,6 +8,7 @@ public class Level : MonoBehaviour
     [SerializeField] private TMP_Text _progressText;
     [SerializeField] private TMP_Text _powerText;
     [SerializeField] private TMP_Text _finishTimeText;
+    [SerializeField] private TMP_Text _newRecordText;
     [SerializeField] private Input _input;
     [SerializeField] private Transform _target;
     [SerializeField] private Transform _finish;
@@ -49,7 +50,10 @@ public class Level : MonoBehaviour
         _finished = true;
         _progressText.text = "100%";
         _finishTimeText.text = Leaderboard.FormatTime(_timer);
-        Leaderboard.SaveScore(new Score("test", _timer));
+        if (Leaderboard.TrySaveScore(new Score("player", _timer)))
+        {
+            _newRecordText.gameObject.SetActive(true);
+        }
     }
     public void Pause()
     {
